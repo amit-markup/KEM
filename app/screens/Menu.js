@@ -234,12 +234,6 @@ export default class UpdatePriceMatrix extends Component {
                             <Text>Set Price ($) :-</Text>
                         </View>
                     </Item>
-                    {this.addMoreRow()}
-                    <View style={[{marginTop:20,alignItems:'flex-end'}]}>
-                    <Button transparent onPress={() => this.setState({matrixRow:this.state.matrixRow+1})}>
-                        <Text style={styles.addMore}>Add more:-</Text>
-                    </Button>
-                    </View>
                    
                 </Form>
 	        </View>
