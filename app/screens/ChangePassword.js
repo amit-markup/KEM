@@ -11,7 +11,7 @@ import { CheckBox, Avatar, Icon, Input, Overlay } from 'react-native-elements';
 // import Common from '../Containers/Common';
 import LinearGradient from 'react-native-linear-gradient';
 
-export default class ForgotPassword extends Component {
+export default class ChangePassword extends Component {
 	constructor(props) {
         super(props)
         this.state = {

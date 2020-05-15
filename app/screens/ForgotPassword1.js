@@ -10,6 +10,7 @@ import { CheckBox, Avatar, Icon, Input, Overlay } from 'react-native-elements';
 // import API from '../Api/Api';
 // import Loader from '../Components/Loader';
 import LinearGradient from 'react-native-linear-gradient';
+
 export default class ForgotPassword extends Component {
     constructor(props) {
         super(props)
