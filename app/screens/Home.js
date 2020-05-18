@@ -8,53 +8,171 @@ import {
   Alert,
   ScrollView,
   FlatList,
-  Dimensions
+  Button
 } from 'react-native';
+import { Header } from 'react-native-elements';
+import Drawer from 'react-native-drawer';
+import SideMenu from './Sidemenu'
 
-var {height, width} = Dimensions.get('window');
-
-export default class Menu extends Component {
+export default class Album extends Component {
 
   constructor(props) {
     super(props);
     this.state = {
       data: [
-        {id:1,  title: "You",      color:"#FF4500", image:"https://img.icons8.com/color/70/000000/name.png"},
-        {id:2,  title: "Home",     color:"#87CEEB", image:"https://img.icons8.com/office/70/000000/home-page.png"},
-        {id:3,  title: "Love",     color:"#4682B4", image:"https://img.icons8.com/color/70/000000/two-hearts.png"} ,
-        {id:4,  title: "Family",   color:"#6A5ACD", image:"https://img.icons8.com/color/70/000000/family.png"} ,
-        {id:5,  title: "Friends",  color:"#FF69B4", image:"https://img.icons8.com/color/70/000000/groups.png"} ,
-        {id:6,  title: "School",   color:"#00BFFF", image:"https://img.icons8.com/color/70/000000/classroom.png"} ,
-        {id:7,  title: "Things",   color:"#00FFFF", image:"https://img.icons8.com/dusk/70/000000/checklist.png"} ,
-        {id:8,  title: "World",    color:"#20B2AA", image:"https://img.icons8.com/dusk/70/000000/globe-earth.png"} ,
-        {id:9,  title: "Remember", color:"#191970", image:"https://img.icons8.com/color/70/000000/to-do.png"} ,
-        {id:10, title: "Game",     color:"#008080", image:"https://img.icons8.com/color/70/000000/basketball.png"} ,
-      ]
+        {id:1, title: "Lorem ipsum is simply",  count:"$500.00", image:"https://lorempixel.com/400/200/nature/6/"},
+        {id:2, title: "Lorem ipsum is simply",  count:"$500.00", image:"https://lorempixel.com/400/200/nature/5/"} ,
+        {id:3, title: "Lorem ipsum is simply",  count:"$500.00", image:"https://lorempixel.com/400/200/nature/4/"}, 
+        {id:4, title: "Lorem ipsum is simply",  count:"$500.00", image:"https://lorempixel.com/400/200/nature/6/"}, 
+        {id:5, title: "Lorem ipsum is simply",  count:"$500.00", image:"https://lorempixel.com/400/200/sports/1/"}, 
+        {id:6, title: "Lorem ipsum is simply",  count:"$500.00", image:"https://lorempixel.com/400/200/nature/8/"}, 
+      ],
+      drawerOpen: false,
+      uniqueValue: 1
     };
   }
 
-  clickEventListener(item) {
-    Alert.alert(item.title)
+
+  forceRemount = () => {
+    this.setState(({ uniqueValue }) => ({
+      uniqueValue: uniqueValue + 1
+    })
+    );
+  }
+
+  addProductToCart = () => {
+    Alert.alert('Success', 'The product has been added to your cart')
+  }
+
+  goBack() {
+    this.props.navigation.goBack();
+  }
+
+
+  closeControlPanel = () => {
+    //showBackButton = true
+    this.setState({ drawerOpen: false })
+  }
+
+  openControlPanel = () => {
+    this.setState({ drawerOpen: !this.state.drawerOpen })
   }
 
   render() {
     return (
       <View style={styles.container}>
+
+{!this.state.drawerOpen ?
+          <Header
+          // leftComponent={<Button transparent onPress={this.goBack.bind(this)}><Image source={require('../../assets/images/back-arrow.png')} style={{ width: 18, height: 21, marginBottom: 25, transform: [{ rotate: '185deg' }] }} /></Button>}
+          centerComponent={{ text: 'Home', style: { color: '#fff', marginBottom: 25, fontSize: 16 } }}
+          rightComponent={
+            <View style={{ flexDirection: 'row', }}>
+              <TouchableOpacity style={{ marginBottom: 20, paddingRight:5 }}>
+                <Image source={require('../../assets/images/search.png')} style={{ width: 18, height: 18, marginBottom: 1 }} />
+              </TouchableOpacity>
+              <TouchableOpacity style={{ paddingRight:5}}>
+                <Image source={require('../../assets/images/cart.png')} style={{ width: 18, height: 18, marginBottom: 2 }} />
+              </TouchableOpacity>
+              <TouchableOpacity onPress={()=> this.openControlPanel()}>
+                <Image source={require('../../assets/images/menu.png')} style={{ width: 18, height: 18, marginBottom: 2 }} />
+              </TouchableOpacity>
+            </View>
+          }
+          containerStyle={{
+            backgroundColor: '#1D4F36',
+            justifyContent: 'space-around',
+            height: 45,
+          }}
+        />
+          :
+          <Header
+          leftComponent={<View style={{ flexDirection: 'row', }}>
+          <TouchableOpacity onPress={()=> this.closeControlPanel()}>
+            <Image source={require('../../assets/images/back-arrow.png')} style={{ width: 18, height: 18, marginBottom: 20 }} />
+          </TouchableOpacity>
+        </View>}
+          centerComponent={{ text: 'Menu Options', style: { color: '#fff', marginBottom: 25, fontSize: 16 } }}
+          rightComponent={
+            <View style={{ flexDirection: 'row', }}>
+              <TouchableOpacity onPress={()=> this.closeControlPanel()}>
+                <Image source={require('../../assets/images/menu.png')} style={{ width: 18, height: 18, marginBottom: 20 }} />
+              </TouchableOpacity>
+            </View>
+          }
+          containerStyle={{
+            backgroundColor: '#1D4F36',
+            justifyContent: 'space-around',
+            height: 45,
+          }}
+        />}
+
+        {/* <Header
+          // leftComponent={<Button transparent onPress={this.goBack.bind(this)}><Image source={require('../../assets/images/back-arrow.png')} style={{ width: 18, height: 21, marginBottom: 25, transform: [{ rotate: '185deg' }] }} /></Button>}
+          centerComponent={{ text: 'Home', style: { color: '#fff', marginBottom: 25, fontSize: 16 } }}
+          rightComponent={
+            <View style={{ flexDirection: 'row', }}>
+              <TouchableOpacity style={{ marginBottom: 20, paddingRight:5 }}>
+                <Image source={require('../../assets/images/search.png')} style={{ width: 18, height: 18, marginBottom: 1 }} />
+              </TouchableOpacity>
+              <TouchableOpacity style={{ paddingRight:5}}>
+                <Image source={require('../../assets/images/cart.png')} style={{ width: 18, height: 18, marginBottom: 2 }} />
+              </TouchableOpacity>
+              <TouchableOpacity>
+                <Image source={require('../../assets/images/menu.png')} style={{ width: 18, height: 18, marginBottom: 2 }} />
+              </TouchableOpacity>
+            </View>
+          }
+          containerStyle={{
+            backgroundColor: '#1D4F36',
+            justifyContent: 'space-around',
+            height: 45,
+          }}
+        /> */}
+        <Drawer
+          open={this.state.drawerOpen}
+          type="overlay"
+          tapToClose={true}
+          ref={(ref) => { this.drawer = ref }}
+          content={<SideMenu {...this.props} forceRemount={() => { this.forceRemount() }} onDrawerItemClick={(val) => this.setState({ drawerOpen: val })} />}
+          onClose={() => this.closeControlPanel()} >
         <FlatList style={styles.list}
           contentContainerStyle={styles.listContainer}
           data={this.state.data}
           horizontal={false}
+          numColumns={2}
           keyExtractor= {(item) => {
             return item.id;
           }}
-          renderItem={({item}) => {
+          ItemSeparatorComponent={() => {
             return (
-              <TouchableOpacity style={[styles.card, {backgroundColor:item.color}]} onPress={() => {this.clickEventListener(item)}}>
-                <Image style={styles.cardImage} source={{uri:item.image}}/>
-                <Text style={styles.title}>{item.title}</Text>
+              <View style={styles.separator}/>
+            )
+          }}
+          renderItem={(post) => {
+            const item = post.item;
+            return (
+              <TouchableOpacity style={styles.card}>
+                <View style={styles.imageContainer}>
+                  <Image style={styles.cardImage} source={{uri:item.image}}/>
+                </View>
+                <View style={[styles.cardContent,{ padding:8}]}>
+                  <Text style={styles.title}>{item.title}</Text>
+                  <Text style={styles.count}>({item.count})</Text>
+                  <Text style={styles.description}>Lorem ipsum is simple a dummy content</Text>
+                  <View style={{flexDirection:'row', justifyContent:'space-between', marginTop:8}}>
+                  <TouchableOpacity style={{backgroundColor:'#1D4F36', padding:7, borderRadius:8, width:70}}>
+                    <Text style={{fontSize:9, alignSelf:'center', color:'#fff'}}>ADD TO CART</Text>
+                  </TouchableOpacity>
+                  <TouchableOpacity style={{backgroundColor:'#cc9330', padding:8, borderRadius:8, width:70}}>
+                    <Text style={{fontSize:9, alignSelf:'center', color:'#fff'}}>BUY NOW</Text>
+                  </TouchableOpacity>
+                  </View>
+                </View>
               </TouchableOpacity>
             )
           }}/>
+          </Drawer>
       </View>
     );
   }
@@ -63,41 +181,60 @@ export default class Menu extends Component {
 const styles = StyleSheet.create({
   container:{
     flex:1,
-    marginTop:20,
   },
   list: {
-    //paddingHorizontal: 5,
-    backgroundColor:"#E6E6E6",
+    paddingHorizontal: 10,
   },
-
+  listContainer:{
+    alignItems:'center'
+  },
+  separator: {
+    marginTop: 10,
+  },
   /******** card **************/
   card:{
-    width: width,
-    height:150,
-    flexDirection:'row',
-    padding:20,
-
-    justifyContent: 'center', 
-    alignItems: 'center' 
+    marginVertical: 8,
+    backgroundColor:"white",
+    flexBasis: '45%',
+    marginHorizontal: 10,
+  },
+  cardContent: {
+    paddingVertical: 17,
+    justifyContent: 'space-between',
   },
   cardImage:{
-    height: 70,
-    width: 70,
+    flex: 1,
+    height: 150,
+    width: null,
   },
+  imageContainer:{
+    shadowColor: "#000",
+    shadowOffset: {
+      width: 0,
+      height: 4,
+    },
+    shadowOpacity: 0.32,
+    shadowRadius: 5.46,
+
+    elevation: 9,
+  },
+  /******** card components **************/
   title:{
-    fontSize:28,
-    flex:1,
-    color:"#FFFFFF",
-    fontWeight:'bold',
-    marginLeft:40
-  },
-  subTitle:{
     fontSize:12,
     flex:1,
-    color:"#FFFFFF",
+    fontWeight:'bold',
+    color:"#333"
   },
-  icon:{
-    height: 20,
-    width: 20, 
+  count:{
+    fontSize:12,
+    flex:1,
+    color:"#1D4F36"
+    , marginTop:3
+  },
+  description:{
+    fontSize:12,
+    flex:1,
+    color:"#333"
+    , marginTop:4
   }
 });

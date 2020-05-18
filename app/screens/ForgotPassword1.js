@@ -120,15 +120,19 @@ export default class ForgotPassword extends Component {
         }
     }
 
+    goback(){
+        this.props.navigation.goBack()
+    }
+
     render() {
         return (
             <ImageBackground source={require("../../assets/images/background.png")} style={styles.forgotPasswordContainer}>
                 <View style={{flexDirection:'row', width:"100%"}}>
-                    <View style={{width:"33%"}}>
+                    <TouchableOpacity onPress={()=> this.goback()} style={{width:"33%"}}>
                         <Image source={require("../../assets/images/back-arrow.png")} style={{width:20, height:20}} />
-                    </View>
+                    </TouchableOpacity>
                     <View>
-                        <Text styles={{ color:'white'}}>Forgot Password</Text>
+                        <Text style={{ color:'white'}}>Forgot Password</Text>
                     </View>
                 </View>
                 <Overlay overlayStyle={[styles.otpModel]} isVisible={this.state.isVisible}>

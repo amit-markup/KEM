@@ -69,10 +69,14 @@ export default class LoginView extends Component {
             </TouchableOpacity>
           </View>
         </View>
-        <TouchableOpacity>
+        <TouchableOpacity onPress={()=> this.props.navigation.navigate("Home")}>
         <LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#05544e', '#0c8e86', '#0c8e86']} style={[styles.buttonContainer]}>
           <Text style={styles.loginText}>LOGIN</Text>
         </LinearGradient>
+        </TouchableOpacity>
+
+        <TouchableOpacity onPress={()=> this.props.navigation.navigate("SignUp")} style={{marginTop:60}}>
+        <Text>Signup?</Text>
         </TouchableOpacity>
       </ImageBackground>
     );

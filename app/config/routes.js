@@ -7,6 +7,7 @@ import Login from '../screens/Login';
 import ForgotPassword1 from '../screens/ForgotPassword1';
 import ForgotPassword2 from '../screens/ForgotPassword2';
 import SignUp from '../screens/SignUp';
+import Home from '../screens/Home';
 
 const loginStack = createStackNavigator({
     Splash: {
@@ -42,6 +43,13 @@ const loginStack = createStackNavigator({
         navigationOptions: {
             header: () => null,
             headerTitle: 'SignUp'
+        },
+    },
+    Home: {
+        screen: Home,
+        navigationOptions: {
+            header: () => null,
+            headerTitle: 'Home'
         },
     },
 },

@@ -93,6 +93,13 @@ export default StyleSheet.create({
         textAlign:'center',
         
       },
+
+      containersss: {
+        flex: 1,
+        // justifyContent: 'center',
+        // alignItems: 'center',
+        // backgroundColor: '#B0E0E6',
+      },
       center:{
         alignItems:'center',
       },
@@ -107,7 +114,93 @@ export default StyleSheet.create({
         borderRadius:6,
         top:50,
       },
+
+      buttonContainerss: {
+        height:45,
+        flexDirection: 'row',
+        justifyContent: 'center',
+        alignItems: 'center',
+        alignSelf:'center',
+        marginBottom:20,
+        width:"90%",
+        borderRadius:6,
+        top:20,
+      },
+
       loginButton: {
         backgroundColor: '#3498db',
       },
+
+
+      /*** Sign Up ***/
+
+      container: {
+        marginHorizontal:15,
+        // borderWidth:1,
+        // borderColor:'red',
+      },
+      //Register page style
+  registerFormContainer: {
+    paddingLeft:10,
+    paddingBottom:20,
+    paddingRight:30,
+    overflow:'hidden',
+  },
+  registerImageContainer: {
+    alignItems:'center',
+    marginVertical:60 ,
+  },
+  twoRow: {
+    flexDirection: 'row',
+    flex:1,
+    justifyContent:'space-between'
+  },
+  sectionRow:{
+    flexDirection:'row',
+  },
+  threeRow: {
+    flex:1,
+  },  
+  sectionColumn: {
+    flex:1,
+    marginHorizontal:10,
+    borderBottomWidth:1,
+    borderBottomColor:'#ccc',
+    
+  },
+  sectionBorder: {
+    margin:10,
+    borderBottomWidth:1,
+    borderBottomColor:'#ccc',
+    paddingBottom:10,
+  },  
+  borderNone: {
+    borderWidth:0,
+    borderColor:'#FFF'
+  },
+  thriceRow: {
+    width:'29%'
+  },
+  halfRow: {
+    width:"46%",
+  },
+  registerOtherComponents:{
+    paddingLeft:10,
+    paddingTop:15,
+  },
+  registerOtherComponentsText:{
+    color: "gray",
+    fontWeight:"500",
+    fontSize:14,
+  },
+  errorContainer: {
+    // backgroundColor:'#F74646',
+    margin:10,
+    borderRadius:2,
+  },
+  error:{
+    color: 'red',
+    paddingHorizontal:10,
+    paddingVertical:3,
+  },
 });

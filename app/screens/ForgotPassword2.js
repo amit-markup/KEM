@@ -115,7 +115,7 @@ export default class ForgotPassword extends Component {
                         <Image source={require("../../assets/images/back-arrow.png")} style={{width:20, height:20}} />
                     </View>
                     <View>
-                        <Text styles={{ color:'#fff'}}>Enter New Password</Text>
+                        <Text style={{ color:'#fff'}}>Enter New Password</Text>
                     </View>
                 </View>
                 <View style={{ flex: 1, justifyContent: 'center', }}>

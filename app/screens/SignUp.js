@@ -1,22 +1,23 @@
 import React, { Component } from 'react';
-import { Platform, StyleSheet, View, ScrollView, Image, TouchableOpacity, AsyncStorage } from 'react-native';
-import styles from '../../assets/styles/style.js';
+import { Platform, StyleSheet, View, ScrollView, ImageBackground, Image, TouchableOpacity, AsyncStorage } from 'react-native';
+import styles from '../../assets/style/style';
 import {
 	Container, Header, Content, Button, Card, CardItem,
 	Text, Body, Form, Item, Root
 } from 'native-base';
 import { CheckBox, Avatar, Input, Icon } from 'react-native-elements';
 import ImagePicker from 'react-native-image-picker';
-import Errors from '../Components/Errors';
-import API from '../Api/Api';
-import Loader from '../Components/Loader';
-import GoogleSearch from '../Components/GoogleSearch';
-import Common from '../Containers/Common';
+import LinearGradient from 'react-native-linear-gradient';
+// import Errors from '../Components/Errors';
+// import API from '../Api/Api';
+// import Loader from '../Components/Loader';
+// import GoogleSearch from '../Components/GoogleSearch';
+// import Common from '../Containers/Common';
 
 const options = {
 	title: 'Select Picture',
-	takePhotoButtonTitle:'Take Photo',
-    chooseFromLibraryButtonTitle: 'Choose from Library',
+	takePhotoButtonTitle: 'Take Photo',
+	chooseFromLibraryButtonTitle: 'Choose from Library',
 	mediaType: 'photo',
 	cameraType: 'back',
 	storageOptions: {
@@ -42,7 +43,6 @@ export default class Register extends Component {
 			loading: false,
 			submit: false,
 		}
-		this.common = new Common();
 	}
 
 	// validate = () => {
@@ -264,7 +264,7 @@ export default class Register extends Component {
 		if (this.state.loading) {
 			return <Loader />
 		}
-		
+
 		var fname = !this.state.fname && this.state.submit ? true : false;
 		var lname = !this.state.lname && this.state.submit ? true : false;
 		var title = !this.state.title && this.state.submit ? true : false;
@@ -279,53 +279,50 @@ export default class Register extends Component {
 
 
 		return (
-			<Root>
+			<ImageBackground style={styles.containersss} source={require("../../assets/images/background.png")}>
+				
 				<ScrollView
 					ref='_scrollView'
 				>
-					<View style={styles.container}>
 						<View style={styles.registerImageContainer}>
 							<Avatar
-								size={100}
-								onPress={() => this.UploadPicture()}
+								size={120}
+								//onPress={() => this.UploadPicture()}
 								overlayContainerStyle={{ backgroundColor: '#FFF' }}
 								rounded icon={{ name: 'person', color: '#C39666', size: 72 }}
 								containerStyle={{ borderColor: '#C39666', borderWidth: 2 }}
 								source={this.state.avatarSource}
 								imageProps={{ resizeMode: 'cover' }}
 							/>
+							<Text style={{fontSize:16, fontWeight:'bold', color:'#05544e'}}>SIGN UP</Text>
 						</View>
-						<View>
+						<View style={{padding:20}}>
 							<Form>
-								{/* <Errors errors={this.state.errors} /> */}
-								<View style={styles.sectionRow}>
-									<View style={styles.threeRow}>
-										<Input autoCompleteType="off" ref={fname => { this.fname = fname }} inputContainerStyle={fname && styles.inputError} rightIcon={fname && this.common.getIcon()} errorMessage={fname && "First Name required"} value={this.state.fname} onChangeText={(text) => this.setState({ 'fname': text })} placeholder="First Name" inputStyle={[styles.font15]} />
-									</View>
-									<View style={styles.threeRow}>
-										<Input autoCompleteType="off" ref={lname => { this.lname = lname }} inputContainerStyle={lname && styles.inputError} rightIcon={lname && this.common.getIcon()} errorMessage={lname && "Last Name required"} value={this.state.lname} onChangeText={(text) => this.setState({ 'lname': text })} placeholder="Last Name" inputStyle={[styles.font15]} />
-									</View>
-								</View>
-								<Input autoCompleteType="off" ref={title => { this.title = title }} inputContainerStyle={title && styles.inputError} rightIcon={title && this.common.getIcon()} errorMessage={title && "Title required"} value={this.state.title} onChangeText={(text) => this.setState({ 'title': text })} placeholder="Title (Real State Agent, Broker, etc)" inputStyle={[styles.font15]} />
-								<Input autoCompleteType="off" ref={email => { this.email = email }} keyboardType="email-address" inputContainerStyle={email && styles.inputError} rightIcon={email && this.common.getIcon()} errorMessage={email && "Email required"} value={this.state.email} onChangeText={(text) => this.setState({ 'email': text })} placeholder="Email" inputStyle={[styles.font15]} />
-								<Input autoCompleteType="off" ref={phone => { this.phone = phone }} keyboardType="numeric" inputContainerStyle={phone && styles.inputError} rightIcon={phone && this.common.getIcon()} errorMessage={phone && "Phone No required"} value={this.state.phone} onChangeText={(text) => this.setState({ 'phone': text })} placeholder="Phone No" inputStyle={[styles.font15]} />
-								<Input autoCompleteType="off" ref={agencyName => { this.agencyName = agencyName }} inputContainerStyle={agencyName && styles.inputError} rightIcon={agencyName && this.common.getIcon()} errorMessage={agencyName && "Agency name required"} value={this.state.agencyName} onChangeText={(text) => this.setState({ 'agencyName': text })} placeholder="Agency Name" inputStyle={[styles.font15]} />
-								<Input autoCompleteType="off" ref={assistantName => { this.assistantName = assistantName }} inputContainerStyle={assistantName && styles.inputError} rightIcon={assistantName && this.common.getIcon()} errorMessage={assistantName && "Assistance name required"} value={this.state.assistantName} onChangeText={(text) => this.setState({ 'assistantName': text })} placeholder="Assistance Name" inputStyle={[styles.font15]} />
-								<Input autoCompleteType="off" ref={assistantEmail => { this.assistantEmail = assistantEmail }} keyboardType="email-address" inputContainerStyle={assistantEmail && styles.inputError} rightIcon={assistantEmail && this.common.getIcon()} errorMessage={assistantEmail && "Assistance email required"} value={this.state.assistantEmail} onChangeText={(text) => this.setState({ 'assistantEmail': text })} placeholder="Assistance Email" inputStyle={[styles.font15]} />
-								<GoogleSearch value={this.state.address} mapAddress={this.mapAddress.bind(this)} />
-								{/* <Input autoCompleteType="off" inputContainerStyle={address && styles.inputError} rightIcon={address && this.common.getIcon()} errorMessage={address && "Address required"} value={this.state.address} onChangeText={(text) => this.setState({'address': text})}  placeholder="Address" inputStyle={[styles.font15]}  /> */}
-								<Input autoCompleteType="off" ref={password => { this.password = password }} inputContainerStyle={password && styles.inputError} rightIcon={password && this.common.getIcon()} errorMessage={password && "Password required"} secureTextEntry={true} value={this.state.password} onChangeText={(text) => this.setState({ 'password': text })} placeholder="Password" inputStyle={[styles.font15]} />
-								<Input autoCompleteType="off" ref={confirmPassword => { this.confirmPassword = confirmPassword }} inputContainerStyle={confirmPassword && styles.inputError} rightIcon={confirmPassword && this.common.getIcon()} errorMessage={confirmPassword && "Confirm Password required"} secureTextEntry={true} value={this.state.confirmPassword} onChangeText={(text) => this.setState({ 'confirmPassword': text })} placeholder="Confirm Password" inputStyle={[styles.font15]} />
-								<View style={[styles.center, { marginTop: 20 }]}>
-									<Button style={styles.loginButton} onPress={() => this.onRegister()}>
-										<Text style={styles.textCenter}>SIGN UP</Text>
-									</Button>
-								</View>
+								<Input containerStyle={{height:50}} value={this.state.fname} onChangeText={(text) => this.setState({ 'fname': text })} placeholder="BUSINESS NAME" inputStyle={[styles.font15]} />
+
+								<Input containerStyle={{height:50}} value={this.state.fname} onChangeText={(text) => this.setState({ 'fname': text })} placeholder="OWNER NAME" inputStyle={[styles.font15]} />
+
+								<Input containerStyle={{height:50}} keyboardType="email-address" value={this.state.email} onChangeText={(text) => this.setState({ 'email': text })} placeholder="EMAIL" inputStyle={[styles.font15]} />
+
+								<Input containerStyle={{height:50}} keyboardType="numeric" value={this.state.phone} onChangeText={(text) => this.setState({ 'phone': text })} placeholder="PHONE NO" inputStyle={[styles.font15]} />
+								
+								<Input containerStyle={{height:50}} value={this.state.address} onChangeText={(text) => this.setState({'address': text})}  placeholder="ADDRESS" inputStyle={[styles.font15]}  />
+
+								<Input containerStyle={{height:50}} value={this.state.address} onChangeText={(text) => this.setState({'address': text})}  placeholder="LICENSE NUMBER" inputStyle={[styles.font15]}  />
+
+								<Input containerStyle={{height:50}} secureTextEntry={true} value={this.state.password} onChangeText={(text) => this.setState({ 'password': text })} placeholder="PASSWORD" inputStyle={[styles.font15]} />
+
+								<Input containerStyle={{height:50}} secureTextEntry={true} value={this.state.confirmPassword} onChangeText={(text) => this.setState({ 'confirmPassword': text })} placeholder="CONFIRM PASSWORD" inputStyle={[styles.font15]} />
+
+								<TouchableOpacity>
+								<LinearGradient start={{x: 0, y: 0}} end={{x: 1, y: 0}} colors={['#05544e', '#0c8e86', '#0c8e86']} style={[styles.buttonContainerss]}>
+								<Text style={{color:'#fff'}}>SIGN UP</Text>
+								</LinearGradient>
+								</TouchableOpacity>
 							</Form>
 						</View>
-					</View>
 				</ScrollView>
-			</Root>
+			</ImageBackground>
 		);
 	}
 }
